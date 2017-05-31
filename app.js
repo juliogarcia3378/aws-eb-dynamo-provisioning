@@ -1,5 +1,6 @@
 // Include the cluster module
 var cluster = require('cluster');
+var path = require('path');
 
 // Code to run if we're in the master process
 if (cluster.isMaster) {
@@ -38,6 +39,7 @@ if (cluster.isMaster) {
 
     app.set('view engine', 'ejs');
     app.set('views', __dirname + '/views');
+    app.use(express.static(path.join(__dirname, 'static')));
     app.use(bodyParser.urlencoded({extended:false}));
 
     app.get('/', function(req, res) {
